@@ -32,7 +32,7 @@
             </div>
         </header>
 
-        <main>
+        <main class="board-wrapper">
             <div id="board" class="board"></div>
         </main>
 
@@ -40,6 +40,12 @@
             <h2 id="message-text"></h2>
         </div>
     </div>
+    
+    <footer class="github-footer">
+        <a href="https://github.com/AmirMoYousefVand/MineSweeper" target="_blank" title="GitHub Repository">
+            <i class="fab fa-github"></i>
+        </a>
+    </footer>
 
     <!-- Settings Modal -->
     <div id="settings-modal" class="modal hidden">
@@ -48,18 +54,26 @@
 
             <div class="setting-item">
                 <label data-i18n="theme">پوسته:</label>
-                <select id="theme-select">
-                    <option value="dark" data-i18n="darkTheme">تاریک</option>
-                    <option value="light" data-i18n="lightTheme">روشن</option>
-                </select>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <label for="theme-toggle" class="toggle-label" dir="ltr">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <span class="toggle-ball"></span>
+                    </label>
+                </div>
             </div>
 
             <div class="setting-item">
                 <label data-i18n="language">زبان:</label>
-                <select id="lang-select">
-                    <option value="fa">فارسی</option>
-                    <option value="en">English</option>
-                </select>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="lang-toggle">
+                    <label for="lang-toggle" class="toggle-label text-toggle" dir="ltr">
+                        <span class="lang-en">EN</span>
+                        <span class="lang-fa">فا</span>
+                        <span class="toggle-ball"></span>
+                    </label>
+                </div>
             </div>
 
             <button id="close-settings"><i class="fas fa-times"></i> <span data-i18n="close">بستن</span></button>

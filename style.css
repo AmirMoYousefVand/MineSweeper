@@ -315,3 +315,116 @@ body.light-mode .modal-content {
 #close-settings {
     margin-top: 10px;
 }
+/* Responsive board fixes */
+.board-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .board-wrapper {
+        justify-content: flex-start;
+    }
+    
+    .game-container {
+        padding: 15px;
+        width: 100%;
+    }
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-label {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-board);
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-mode .toggle-label {
+    background-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.toggle-label i, .toggle-label span:not(.toggle-ball) {
+    font-size: 14px;
+    z-index: 1;
+    color: var(--text-light);
+    width: 50%;
+    text-align: center;
+}
+
+.toggle-label.text-toggle span:not(.toggle-ball) {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.toggle-ball {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 3px;
+    background-color: var(--text-main);
+    border-radius: 50%;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+input:checked + .toggle-label .toggle-ball {
+    transform: translateX(30px);
+}
+
+/* GitHub Footer */
+.github-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+}
+
+.github-footer a {
+    color: var(--text-light);
+    font-size: 30px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.github-footer a:hover {
+    color: var(--text-main);
+    transform: scale(1.1);
+}
+
+body.light-mode .github-footer a {
+    color: var(--bg-secondary);
+}
+
+body.light-mode .github-footer a:hover {
+    color: var(--text-main);
+}

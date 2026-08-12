@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsBtn = document.getElementById('settings-btn');
     const settingsModal = document.getElementById('settings-modal');
     const closeSettingsBtn = document.getElementById('close-settings');
-    const themeSelect = document.getElementById('theme-select');
-    const langSelect = document.getElementById('lang-select');
+    const themeToggle = document.getElementById('theme-toggle');
+    const langToggle = document.getElementById('lang-toggle');
 
     // i18n Translations
     const translations = {
@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             reset: "بازی مجدد",
             settingsTitle: "تنظیمات",
             theme: "پوسته:",
-            darkTheme: "تاریک",
-            lightTheme: "روشن",
             language: "زبان:",
             close: "بستن",
             winMessage: "شما برنده شدید!",
@@ -44,8 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             reset: "Restart",
             settingsTitle: "Settings",
             theme: "Theme:",
-            darkTheme: "Dark",
-            lightTheme: "Light",
             language: "Language:",
             close: "Close",
             winMessage: "You won!",
@@ -81,8 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply saved preferences
     applyLanguage(currentLang);
     applyTheme(currentTheme);
-    themeSelect.value = currentTheme;
-    langSelect.value = currentLang;
+
+    // Set initial toggle states
+    themeToggle.checked = currentTheme === 'light';
+    langToggle.checked = currentLang === 'en';
 
     // Initialize the game
     function initGame() {
@@ -141,6 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Update difficulty select options
+        const options = difficultySelect.querySelectorAll('option');
+        options.forEach(opt => {
+            const key = opt.value; // easy, medium, hard
+            if (dict[key]) {
+                opt.textContent = dict[key];
+            }
+        });
+
         // Update specific titles
         settingsBtn.title = dict.settingsTitle;
 
@@ -168,12 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    themeSelect.addEventListener('change', (e) => {
-        applyTheme(e.target.value);
+    themeToggle.addEventListener('change', (e) => {
+        applyTheme(e.target.checked ? 'light' : 'dark');
     });
 
-    langSelect.addEventListener('change', (e) => {
-        applyLanguage(e.target.value);
+    langToggle.addEventListener('change', (e) => {
+        applyLanguage(e.target.checked ? 'en' : 'fa');
     });
 
     // Create the logical board (without mines initially)
