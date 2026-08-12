@@ -155,7 +155,8 @@ button:active {
 .text-primary { color: var(--color-1); }
 
 .board {
-    display: grid;
+    display: inline-grid;
+    margin: 0 auto;
     gap: 2px;
     background: var(--bg-board);
     padding: 10px;
@@ -321,16 +322,11 @@ body.light-mode .modal-content {
 .board-wrapper {
     width: 100%;
     overflow-x: auto;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     padding-bottom: 10px;
 }
 
 @media (max-width: 600px) {
-    .board-wrapper {
-        justify-content: flex-start;
-    }
-    
     .game-container {
         padding: 15px;
         width: 100%;
@@ -424,7 +420,7 @@ input:checked + .toggle-label .toggle-ball {
 
 .github-footer a:hover {
     color: var(--text-main);
-    transform: scale(1.1);
+    transform: translateY(-3px);
 }
 
 body.light-mode .github-footer a {
