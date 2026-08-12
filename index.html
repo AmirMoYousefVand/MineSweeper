@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بازی مین‌روب | Minesweeper</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>مین‌روب</h1>
+            <div class="controls">
+                <select id="difficulty">
+                    <option value="easy">آسان (۹×۹ - ۱۰ مین)</option>
+                    <option value="medium">متوسط (۱۶×۱۶ - ۴۰ مین)</option>
+                    <option value="hard">سخت (۳۰×۱۶ - ۹۹ مین)</option>
+                </select>
+                <button id="reset-btn"><i class="fas fa-redo"></i> بازی مجدد</button>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <i class="fas fa-flag text-danger"></i>
+                    <span id="mines-count">10</span>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-clock text-primary"></i>
+                    <span id="timer">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="board" class="board"></div>
+        </main>
+
+        <div id="game-message" class="hidden">
+            <h2 id="message-text"></h2>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
