@@ -47,7 +47,8 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-light);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
@@ -56,6 +57,7 @@ body {
 
 .game-container {
     background: var(--bg-secondary);
+    margin: auto;
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -224,7 +226,7 @@ body.light-mode .cell.revealed {
 .cell[data-value="8"] { color: var(--color-8); }
 
 #game-message {
-    position: static;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -259,7 +261,7 @@ body.light-mode #game-message {
 
 /* Modal Styles */
 .modal {
-    position: static;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -326,7 +328,7 @@ body.light-mode .modal-content {
 
 @media (max-width: 600px) {
     .board-wrapper {
-        justify-content: center;
+        justify-content: flex-start;
     }
     
     .game-container {
@@ -403,7 +405,9 @@ input:checked + .toggle-label .toggle-ball {
 /* GitHub Footer */
 .github-footer {
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .github-footer a {
