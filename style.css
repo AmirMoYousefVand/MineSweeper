@@ -224,7 +224,7 @@ body.light-mode .cell.revealed {
 .cell[data-value="8"] { color: var(--color-8); }
 
 #game-message {
-    position: fixed;
+    position: static;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -251,7 +251,7 @@ body.light-mode #game-message {
 
 #message-text {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-margin-top: 20px;
 }
 
 .win { color: var(--color-2); }
@@ -259,7 +259,7 @@ body.light-mode #game-message {
 
 /* Modal Styles */
 .modal {
-    position: fixed;
+    position: static;
     top: 0;
     left: 0;
     width: 100%;
@@ -326,7 +326,7 @@ body.light-mode .modal-content {
 
 @media (max-width: 600px) {
     .board-wrapper {
-        justify-content: flex-start;
+        justify-content: center;
     }
     
     .game-container {
@@ -402,18 +402,20 @@ input:checked + .toggle-label .toggle-ball {
 
 /* GitHub Footer */
 .github-footer {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .github-footer a {
     color: var(--text-light);
-    font-size: 30px;
+    font-size: 24px;
     transition: all 0.3s ease;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .github-footer a:hover {
@@ -422,7 +424,7 @@ input:checked + .toggle-label .toggle-ball {
 }
 
 body.light-mode .github-footer a {
-    color: var(--bg-secondary);
+    color: #1c1e21;
 }
 
 body.light-mode .github-footer a:hover {
