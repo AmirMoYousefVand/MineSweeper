@@ -7,6 +7,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameMessage = document.getElementById('game-message');
     const messageText = document.getElementById('message-text');
 
+    // Settings elements
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsModal = document.getElementById('settings-modal');
+    const closeSettingsBtn = document.getElementById('close-settings');
+    const themeSelect = document.getElementById('theme-select');
+    const langSelect = document.getElementById('lang-select');
+
+    // i18n Translations
+    const translations = {
+        fa: {
+            appTitle: "بازی مین‌روب | Minesweeper",
+            title: "مین‌روب",
+            easy: "آسان (۹×۹ - ۱۰ مین)",
+            medium: "متوسط (۱۶×۱۶ - ۴۰ مین)",
+            hard: "سخت (۳۰×۱۶ - ۹۹ مین)",
+            reset: "بازی مجدد",
+            settingsTitle: "تنظیمات",
+            theme: "پوسته:",
+            darkTheme: "تاریک",
+            lightTheme: "روشن",
+            language: "زبان:",
+            close: "بستن",
+            winMessage: "شما برنده شدید!",
+            loseMessage: "باختی!",
+            timeText: "زمان:",
+            secondsText: "ثانیه",
+            playAgain: "دوباره"
+        },
+        en: {
+            appTitle: "Minesweeper Game",
+            title: "Minesweeper",
+            easy: "Easy (9x9 - 10 mines)",
+            medium: "Medium (16x16 - 40 mines)",
+            hard: "Hard (30x16 - 99 mines)",
+            reset: "Restart",
+            settingsTitle: "Settings",
+            theme: "Theme:",
+            darkTheme: "Dark",
+            lightTheme: "Light",
+            language: "Language:",
+            close: "Close",
+            winMessage: "You won!",
+            loseMessage: "Game Over!",
+            timeText: "Time:",
+            secondsText: "seconds",
+            playAgain: "Play Again"
+        }
+    };
+
+    let currentLang = localStorage.getItem('language') || 'fa';
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+
     // Difficulty settings
     const difficulties = {
         easy: { rows: 9, cols: 9, mines: 10 },
@@ -25,6 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let seconds = 0;
 
     const MINE = -1;
+
+    // Apply saved preferences
+    applyLanguage(currentLang);
+    applyTheme(currentTheme);
+    themeSelect.value = currentTheme;
+    langSelect.value = currentLang;
 
     // Initialize the game
     function initGame() {
@@ -52,6 +110,71 @@ document.addEventListener('DOMContentLoaded', () => {
         createBoard();
         renderBoard();
     }
+
+    // Settings Logic
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+        localStorage.setItem('theme', theme);
+        currentTheme = theme;
+    }
+
+    function applyLanguage(lang) {
+        const dict = translations[lang];
+        if (!dict) return;
+
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+        // Update title
+        document.title = dict.appTitle;
+
+        // Update all elements with data-i18n
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) {
+                el.textContent = dict[key];
+            }
+        });
+
+        // Update specific titles
+        settingsBtn.title = dict.settingsTitle;
+
+        localStorage.setItem('language', lang);
+        currentLang = lang;
+
+        // Re-render win/lose message if visible
+        if (!gameMessage.classList.contains('hidden')) {
+            const win = !messageText.querySelector('.lose');
+            showMessage(win);
+        }
+    }
+
+    settingsBtn.addEventListener('click', () => {
+        settingsModal.classList.remove('hidden');
+    });
+
+    closeSettingsBtn.addEventListener('click', () => {
+        settingsModal.classList.add('hidden');
+    });
+
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.classList.add('hidden');
+        }
+    });
+
+    themeSelect.addEventListener('change', (e) => {
+        applyTheme(e.target.value);
+    });
+
+    langSelect.addEventListener('change', (e) => {
+        applyLanguage(e.target.value);
+    });
 
     // Create the logical board (without mines initially)
     function createBoard() {
@@ -224,15 +347,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function showMessage(win) {
         setTimeout(() => {
             gameMessage.classList.remove('hidden');
+            const dict = translations[currentLang];
+
             if (win) {
-                messageText.innerHTML = '<span class="win"><i class="fas fa-trophy"></i> شما برنده شدید!</span><br><span style="font-size: 1rem; color: white;">زمان: ' + seconds + ' ثانیه</span>';
+                messageText.innerHTML = `<span class="win"><i class="fas fa-trophy"></i> ${dict.winMessage}</span><br><span style="font-size: 1rem; color: var(--text-light);">${dict.timeText} ${seconds} ${dict.secondsText}</span>`;
             } else {
-                messageText.innerHTML = '<span class="lose"><i class="fas fa-skull"></i> باختی!</span>';
+                messageText.innerHTML = `<span class="lose"><i class="fas fa-skull"></i> ${dict.loseMessage}</span>`;
             }
 
             // Add a small restart button inside message
             const restartBtn = document.createElement('button');
-            restartBtn.innerHTML = '<i class="fas fa-redo"></i> دوباره';
+            restartBtn.innerHTML = `<i class="fas fa-redo"></i> ${dict.playAgain}`;
             restartBtn.style.marginTop = '20px';
             restartBtn.onclick = initGame;
 

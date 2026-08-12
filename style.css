@@ -23,6 +23,18 @@
     --border-radius: 12px;
 }
 
+body.light-mode {
+    --bg-primary: #f0f2f5;
+    --bg-secondary: #ffffff;
+    --bg-board: #e4e6eb;
+    --cell-hidden: #b0b3b8;
+    --cell-hidden-hover: #9fa2a7;
+    --cell-revealed: #e4e6eb;
+    --text-main: #d32f2f;
+    --text-light: #1c1e21;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -39,6 +51,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .game-container {
@@ -51,6 +64,7 @@ body {
     align-items: center;
     gap: 20px;
     max-width: 100%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 header {
@@ -87,6 +101,10 @@ select, button {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+body.light-mode select, body.light-mode button:not(#reset-btn):not(#settings-btn) {
+    border: 1px solid #ccc;
+}
+
 select:focus, button:focus {
     outline: none;
     border-color: var(--text-main);
@@ -108,6 +126,10 @@ button:active {
     transform: translateY(0);
 }
 
+#settings-btn {
+    padding: 10px 15px;
+}
+
 .stats {
     display: flex;
     gap: 30px;
@@ -116,6 +138,7 @@ button:active {
     background: var(--bg-primary);
     padding: 15px;
     border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 .stat-box {
@@ -136,6 +159,11 @@ button:active {
     padding: 10px;
     border-radius: var(--border-radius);
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+}
+
+body.light-mode .board {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cell {
@@ -169,6 +197,10 @@ button:active {
     background: var(--cell-revealed);
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5);
     cursor: default;
+}
+
+body.light-mode .cell.revealed {
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .cell.mine {
@@ -207,6 +239,11 @@ button:active {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+body.light-mode #game-message {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
 #game-message.hidden {
     opacity: 0;
     visibility: hidden;
@@ -219,3 +256,62 @@ button:active {
 
 .win { color: var(--color-2); }
 .lose { color: var(--color-mine); }
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+.modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-mode .modal-content {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.setting-item select {
+    width: 50%;
+}
+
+#close-settings {
+    margin-top: 10px;
+}
