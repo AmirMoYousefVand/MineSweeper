@@ -26,7 +26,7 @@ No installation, build steps, or servers are required to run this game!
 
 1. Clone or download this repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/minesweeper.git
+   git clone https://github.com/AmirMoYousefVand/minesweeper.git
    ```
 2. Navigate to the downloaded folder.
 3. Simply double-click the `index.html` file to open it in your default web browser (Chrome, Firefox, Safari, Edge, etc.).

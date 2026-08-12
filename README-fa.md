@@ -26,7 +26,7 @@
 
 ۱. این مخزن (Repository) را دانلود یا کلون کنید:
    ```bash
-   git clone https://github.com/yourusername/minesweeper.git
+   git clone https://github.com/AmirMoYousefVand/minesweeper.git
    ```
 ۲. به پوشه دانلود شده بروید.
 ۳. فقط کافیست فایل `index.html` را با مرورگر دلخواه خود (کروم، فایرفاکس، سافاری و ...) باز کنید.
