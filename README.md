@@ -22,9 +22,9 @@ A modern, web-based implementation of the classic Minesweeper game built with HT
 
 ## How to Download and Run
 
-**Online play** you can play the game online on this page: https://amirmoyousefvand.github.io/MineSweeper/
+**Online play:** you can play the game online on this page: https://amirmoyousefvand.github.io/MineSweeper/
 
-**Offline play** No installation, build steps, or servers are required to run this game!
+**Offline play:** No installation, build steps, or servers are required to run this game!
 
 1. Clone or download this repository to your local machine:
    ```bash
